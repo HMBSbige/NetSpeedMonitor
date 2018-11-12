@@ -15,7 +15,7 @@ namespace NetSpeedMonitor.NetUtils
 
 		private long _uploadData;
 
-		public string UploadSpeed => $@"{Util.CountSize(UploadData)}/S";
+		public string UploadSpeed => $@"{Util.ToByteSize(UploadData)}/S";
 
 		public long UploadData
 		{
@@ -37,7 +37,7 @@ namespace NetSpeedMonitor.NetUtils
 
 		private long _uploadDataCount;
 
-		public string UploadDataCountStr => Util.CountSize(UploadDataCount);
+		public string UploadDataCountStr => Util.ToByteSize(UploadDataCount);
 
 		public long UploadDataCount
 		{
@@ -59,7 +59,7 @@ namespace NetSpeedMonitor.NetUtils
 
 		private long _downloadData;
 
-		public string DownloadSpeed => $@"{Util.CountSize(DownloadData)}/S";
+		public string DownloadSpeed => $@"{Util.ToByteSize(DownloadData)}/S";
 
 		public long DownloadData
 		{
@@ -81,7 +81,7 @@ namespace NetSpeedMonitor.NetUtils
 
 		private long _downloadDataCount;
 
-		public string DownloadDataCountStr => Util.CountSize(DownloadDataCount);
+		public string DownloadDataCountStr => Util.ToByteSize(DownloadDataCount);
 
 		public long DownloadDataCount
 		{

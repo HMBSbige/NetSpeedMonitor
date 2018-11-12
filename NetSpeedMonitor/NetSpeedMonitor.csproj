@@ -61,6 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MyListView\MySorter.cs" />
+    <Compile Include="MyListView\ListViewCustomComparer.cs" />
+    <Compile Include="MyListView\ListViewSorter.cs" />
     <Compile Include="Utils\ThreadSafeCollection.cs" />
     <Compile Include="Utils\CheckPermission.cs" />
     <Compile Include="Utils\ListTool.cs" />

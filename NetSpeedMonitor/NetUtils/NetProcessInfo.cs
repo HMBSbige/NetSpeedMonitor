@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
 
 namespace NetSpeedMonitor.NetUtils
 {
@@ -57,9 +58,11 @@ namespace NetSpeedMonitor.NetUtils
 				{
 					_processIcon = value;
 					NotifyPropertyChanged();
+					NotifyPropertyChanged(nameof(ProcessImage));
 				}
 			}
 		}
+		public ImageSource ProcessImage => ProcessIcon.ToImageSource();
 
 		public DateTime LastUpdateTime
 		{
@@ -87,7 +90,7 @@ namespace NetSpeedMonitor.NetUtils
 				}
 			}
 		}
-		public string UploadSpeed => $@"{Util.CountSize(UploadData)}/S";
+		public string UploadSpeed => $@"{Util.ToByteSize(UploadData)}/S";
 
 		public long DownloadData
 		{
@@ -102,7 +105,7 @@ namespace NetSpeedMonitor.NetUtils
 				}
 			}
 		}
-		public string DownloadSpeed => $@"{Util.CountSize(DownloadData)}/S";
+		public string DownloadSpeed => $@"{Util.ToByteSize(DownloadData)}/S";
 
 		public long UploadDataCount
 		{
@@ -117,7 +120,7 @@ namespace NetSpeedMonitor.NetUtils
 				}
 			}
 		}
-		public string UploadDataCountStr => Util.CountSize(UploadDataCount);
+		public string UploadDataCountStr => Util.ToByteSize(UploadDataCount);
 
 		public long DownloadDataCount
 		{
@@ -132,7 +135,7 @@ namespace NetSpeedMonitor.NetUtils
 				}
 			}
 		}
-		public string DownloadDataCountStr => Util.CountSize(DownloadDataCount);
+		public string DownloadDataCountStr => Util.ToByteSize(DownloadDataCount);
 
 		public long UploadBag
 		{
