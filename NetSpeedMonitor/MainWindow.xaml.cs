@@ -1,5 +1,6 @@
 ﻿using NetSpeedMonitor.MyListView;
 using NetSpeedMonitor.NetUtils;
+using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -13,8 +14,11 @@ namespace NetSpeedMonitor
 		public MainWindow()
 		{
 			InitializeComponent();
-
 		}
+
+		private readonly NetFlowService _ns = new NetFlowService();
+
+		#region 列表排序
 
 		private void AddSortBinding()
 		{
@@ -26,36 +30,14 @@ namespace NetSpeedMonitor
 			}
 
 			ListViewSorter.SetCustomSorter(ProcessesList, new MySorter());
-
-			_ns.NetProcessInfoList.CollectionChanged += ItemSource_CollectionChanged;
 		}
 
-		private readonly NetFlowService _ns = new NetFlowService();
-
-		private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e)
-		{
-			_ns.Start();
-
-			AddSortBinding();
-
-			DownloadSpeedLabel.DataContext = _ns.NetFlow;
-			UploadSpeedLabel.DataContext = _ns.NetFlow;
-
-			ProcessesList.ItemsSource = _ns.NetProcessInfoList;
-		}
-
-		private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-		{
-			//DownloadSpeedLabel.Content = @"999.9 GiB/S";
-			//UploadSpeedLabel.Content = @"999.9 GiB/S";
-			_ns.Stop();
-		}
-
-		private void ItemSource_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		private void ItemSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			try
 			{
-				if (e.Action != System.Collections.Specialized.NotifyCollectionChangedAction.Replace)
+				//增加或删除
+				if (e.Action != NotifyCollectionChangedAction.Replace)
 				{
 					var dataView = CollectionViewSource.GetDefaultView(ProcessesList.ItemsSource);
 					dataView.Refresh();
@@ -65,6 +47,32 @@ namespace NetSpeedMonitor
 			{
 				// ignored
 			}
+		}
+
+		#endregion
+
+		private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e)
+		{
+			_ns.Start();
+
+			AddSortBinding();
+
+			_ns.NetProcessInfoList.CollectionChanged += ItemSource_CollectionChanged;
+			_ns.DataChangeEvent += () => { ProcessesList.Dispatcher.Invoke(ListViewSorter.SortLast); };
+
+			DownloadSpeedLabel.DataContext = _ns.NetFlow;
+			UploadSpeedLabel.DataContext = _ns.NetFlow;
+
+			ProcessesList.ItemsSource = _ns.NetProcessInfoList;
+		}
+
+
+		private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			//DownloadSpeedLabel.Content = @"999.9 GiB/S";
+			//UploadSpeedLabel.Content = @"999.9 GiB/S";
+			//_ns.Stop();
+			//ProcessesList.Dispatcher.Invoke(ListViewSorter.SortLast);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace NetSpeedMonitor.NetUtils
+namespace NetSpeedMonitor.Collections
 {
 	public class NetConnectionInfo
 	{

@@ -64,7 +64,7 @@
     <Compile Include="MyListView\MySorter.cs" />
     <Compile Include="MyListView\ListViewCustomComparer.cs" />
     <Compile Include="MyListView\ListViewSorter.cs" />
-    <Compile Include="Utils\ThreadSafeCollection.cs" />
+    <Compile Include="Collections\ThreadSafeCollection.cs" />
     <Compile Include="Utils\CheckPermission.cs" />
     <Compile Include="Utils\ListTool.cs" />
     <Compile Include="Utils\ProcessInfoTool.cs" />
@@ -85,11 +85,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NetUtils\NetCardInfoTool.cs" />
-    <Compile Include="NetUtils\NetConnectionInfo.cs" />
+    <Compile Include="Collections\NetConnectionInfo.cs" />
     <Compile Include="NetUtils\NetFlowService.cs" />
-    <Compile Include="NetUtils\NetflowTool.cs" />
+    <Compile Include="Collections\NetflowTool.cs" />
     <Compile Include="NetUtils\NetPacketTool.cs" />
-    <Compile Include="NetUtils\NetProcessInfo.cs" />
+    <Compile Include="Collections\NetProcessInfo.cs" />
     <Compile Include="NetUtils\NetProcessTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

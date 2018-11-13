@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Data;
 
-namespace NetSpeedMonitor.Utils
+namespace NetSpeedMonitor.Collections
 {
 	public class ThreadSafeCollection<T> : ObservableCollection<T>
 	{

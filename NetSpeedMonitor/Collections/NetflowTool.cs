@@ -1,4 +1,5 @@
-﻿using NetSpeedMonitor.Utils;
+﻿using NetSpeedMonitor.NetUtils;
+using NetSpeedMonitor.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NetSpeedMonitor.NetUtils
+namespace NetSpeedMonitor.Collections
 {
 	public class NetFlowTool : INotifyPropertyChanged
 	{

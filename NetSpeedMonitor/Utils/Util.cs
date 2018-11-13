@@ -58,8 +58,6 @@ namespace NetSpeedMonitor.Utils
 				throw new ArgumentException(@"Wrong Byte Size");
 			}
 
-			const double step = 1024.00;
-
 			switch (s[1])
 			{
 				case @"TiB" when double.TryParse(s[0], out var res):

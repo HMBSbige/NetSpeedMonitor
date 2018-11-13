@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
-namespace NetSpeedMonitor.NetUtils
+namespace NetSpeedMonitor.Collections
 {
 	public class NetProcessInfo : INotifyPropertyChanged
 	{

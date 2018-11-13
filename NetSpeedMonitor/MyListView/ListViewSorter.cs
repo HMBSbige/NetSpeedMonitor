@@ -56,7 +56,7 @@ namespace NetSpeedMonitor.MyListView
 		}
 
 		private static GridViewColumnHeader _lastHeaderClicked;
-		private static ListSortDirection _lastDirection = ListSortDirection.Ascending;
+		private static ListSortDirection _lastDirection = ListSortDirection.Descending;
 		private static ListView _lv;
 
 		private static void OnRegisterSortableGrid(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -161,6 +161,14 @@ namespace NetSpeedMonitor.MyListView
 				{
 					// ignored
 				}
+			}
+		}
+
+		public static void SortLast()
+		{
+			if (_lastHeaderClicked != null)
+			{
+				Sort(_lastHeaderClicked.Column.Header.ToString(), _lastDirection);
 			}
 		}
 	}

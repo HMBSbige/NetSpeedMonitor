@@ -1,4 +1,5 @@
-﻿using NetSpeedMonitor.Utils;
+﻿using NetSpeedMonitor.Collections;
+using NetSpeedMonitor.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,6 +25,9 @@ namespace NetSpeedMonitor.NetUtils
 		private List<string> AllIPv4Address = new List<string>();
 
 		public long LostPacketCount { get; set; }
+
+		public delegate void ChangeEvent();
+		public ChangeEvent DataChangeEvent;
 
 		public void Start(int interval = 1000)
 		{
@@ -92,6 +96,8 @@ namespace NetSpeedMonitor.NetUtils
 			SetNetProcess();
 
 			CalcNetProcessInfo();
+
+			DataChangeEvent?.Invoke();
 
 			CheckRestart();
 		}

@@ -1,4 +1,4 @@
-﻿using NetSpeedMonitor.NetUtils;
+﻿using NetSpeedMonitor.Collections;
 using System.ComponentModel;
 
 namespace NetSpeedMonitor.MyListView
