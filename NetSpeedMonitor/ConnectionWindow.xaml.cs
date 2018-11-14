@@ -10,8 +10,8 @@ namespace NetSpeedMonitor
 		public ConnectionWindow(ThreadSafeCollection<NetConnectionInfo> info, string processName)
 		{
 			InitializeComponent();
-			List1.ItemsSource = info;
 			Title = processName;
+			List1.ItemsSource = info;
 		}
 	}
 }

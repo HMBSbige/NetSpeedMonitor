@@ -29,18 +29,25 @@ namespace NetSpeedMonitor.NetUtils
 		public delegate void ChangeEvent();
 		public ChangeEvent DataChangeEvent;
 
-		public void Start(int interval = 1000)
+		public bool Start(int interval = 1000)
 		{
 			#region 启动系统性能计数器统计
+
+			bool isSucceed;
 			try
 			{
-				NetFlow.Start(interval);
+				isSucceed = NetFlow.Start(interval);
 				NetFlow.DataMonitorEvent += DataMonitorEvent;
 				IsNetFlowRun = true;
 			}
 			catch
 			{
-				// ignored
+				return false;
+			}
+
+			if (!isSucceed)
+			{
+				return false;
 			}
 
 			#endregion
@@ -70,6 +77,8 @@ namespace NetSpeedMonitor.NetUtils
 				}
 			}
 			#endregion
+
+			return true;
 		}
 
 		public void Stop()

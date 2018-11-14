@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="ConnectionWindow" Height="302" Width="659">
+        Title="ConnectionWindow" Height="302" Width="659" WindowStartupLocation="CenterOwner">
 	<Grid>
 		<ListView x:Name="List1" Margin="10">
 			<ListView.View>
