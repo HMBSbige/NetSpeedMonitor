@@ -222,7 +222,7 @@ namespace NetSpeedMonitor.NetUtils
 			{
 				foreach (var x in NetProcessInfoList)
 				{
-					x.NetConnectionInfoList = new List<NetConnectionInfo>();
+					x.NetConnectionInfoList = new ThreadSafeCollection<NetConnectionInfo>();
 				}
 			}
 
@@ -261,7 +261,7 @@ namespace NetSpeedMonitor.NetUtils
 								ProcessIcon = ProcessInfoTool.GetIcon(p, false),
 								ProcessName = p.ProcessName,
 								LastUpdateTime = DateTime.Now,
-								NetConnectionInfoList = new List<NetConnectionInfo>
+								NetConnectionInfoList = new ThreadSafeCollection<NetConnectionInfo>
 								{
 									new NetConnectionInfo
 									{
@@ -319,7 +319,7 @@ namespace NetSpeedMonitor.NetUtils
 								ProcessIcon = ProcessInfoTool.GetIcon(p, false),
 								ProcessName = p.ProcessName,
 								LastUpdateTime = DateTime.Now,
-								NetConnectionInfoList = new List<NetConnectionInfo>
+								NetConnectionInfoList = new ThreadSafeCollection<NetConnectionInfo>
 								{
 									new NetConnectionInfo
 									{

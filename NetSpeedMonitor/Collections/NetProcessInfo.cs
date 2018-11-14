@@ -1,6 +1,5 @@
 ﻿using NetSpeedMonitor.Utils;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -22,6 +21,7 @@ namespace NetSpeedMonitor.Collections
 		private long _downloadBag;
 		private long _uploadBagCount;
 		private long _downloadBagCount;
+		private ThreadSafeCollection<NetConnectionInfo> _netConnectionInfoList;
 
 		public int ProcessId
 		{
@@ -189,8 +189,18 @@ namespace NetSpeedMonitor.Collections
 			}
 		}
 
-		//TODO
-		public List<NetConnectionInfo> NetConnectionInfoList { get; set; }
+		public ThreadSafeCollection<NetConnectionInfo> NetConnectionInfoList
+		{
+			get => _netConnectionInfoList;
+			set
+			{
+				if (_netConnectionInfoList != value)
+				{
+					_netConnectionInfoList = value;
+					NotifyPropertyChanged();
+				}
+			}
+		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

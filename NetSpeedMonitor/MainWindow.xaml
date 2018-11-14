@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NetSpeedMonitor"
         xmlns:myListView="clr-namespace:NetSpeedMonitor.MyListView"
         mc:Ignorable="d"
-        Title="NetSpeedMonitor" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="NetSpeedMonitor" Height="537" Width="734" Loaded="Window_Loaded">
 
 	<Window.Resources>
 		<DataTemplate x:Key="HeaderTemplateArrowUp">
@@ -37,8 +36,7 @@
 	<Grid>
 		<Label x:Name="DownloadSpeedLabel" Content="{Binding DownloadSpeed}" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Foreground="Green"/>
 		<Label x:Name="UploadSpeedLabel" Content="{Binding UploadSpeed}" HorizontalAlignment="Left" Margin="315,10,0,0" VerticalAlignment="Top" Foreground="#FFE29510"/>
-		<Button Content="Button" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-		<Label Content="Download Speed: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Download Speed: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 		<Label Content="Upload Speed: " HorizontalAlignment="Left" Margin="212,10,0,0" VerticalAlignment="Top"/>
 		<ListView 
 		x:Name="ProcessesList" 
@@ -46,7 +44,7 @@
 		VirtualizingStackPanel.IsVirtualizing="True"
 		myListView:ListViewSorter.IsListViewSortable="True">
 			<ListView.View>
-				<GridView>
+				<GridView AllowsColumnReorder="False">
 					<GridViewColumn Header="Process Name">
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
@@ -57,10 +55,45 @@
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
-					<GridViewColumn Header="Download Speed" DisplayMemberBinding="{Binding DownloadSpeed}"/>
-					<GridViewColumn Header="Upload Speed" DisplayMemberBinding="{Binding UploadSpeed}"/>
-					<GridViewColumn Header="Download Count" DisplayMemberBinding="{Binding DownloadDataCountStr}"/>
-					<GridViewColumn Header="Upload Count" DisplayMemberBinding="{Binding UploadDataCountStr}"/>
+					<GridViewColumn Header="Download Speed">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding DownloadSpeed}" Foreground="Green" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Upload Speed">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding UploadSpeed}" Foreground="#FFE29510" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Download Count">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding DownloadDataCountStr}" Foreground="Green" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Upload Count">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding UploadDataCountStr}" Foreground="#FFE29510" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Connections">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock>
+									<Hyperlink RequestNavigate="ShowConnectionList" TargetName="{Binding ProcessName}" NavigateUri="">
+										<TextBlock Text="{Binding NetConnectionInfoList.Count}" Foreground="LightSlateGray" />
+									</Hyperlink>
+								</TextBlock>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
 				</GridView>
 			</ListView.View>
 		</ListView>

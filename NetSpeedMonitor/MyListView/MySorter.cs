@@ -1,5 +1,6 @@
 ﻿using NetSpeedMonitor.Collections;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace NetSpeedMonitor.MyListView
 {
@@ -19,7 +20,7 @@ namespace NetSpeedMonitor.MyListView
 					{
 						var xStr = a.ProcessName;
 						var yStr = b.ProcessName;
-						result = string.CompareOrdinal(xStr, yStr);
+						result = string.Compare(xStr, yStr, CultureInfo.CurrentCulture, CompareOptions.OrdinalIgnoreCase);
 					}
 					else
 					{
@@ -48,6 +49,12 @@ namespace NetSpeedMonitor.MyListView
 							{
 								xInt = a.UploadDataCount;
 								yInt = b.UploadDataCount;
+								break;
+							}
+							case @"Connections":
+							{
+								xInt = a.NetConnectionInfoList.Count;
+								yInt = b.NetConnectionInfoList.Count;
 								break;
 							}
 						}

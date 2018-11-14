@@ -1,8 +1,11 @@
 ﻿using NetSpeedMonitor.MyListView;
 using NetSpeedMonitor.NetUtils;
 using System.Collections.Specialized;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 
 namespace NetSpeedMonitor
 {
@@ -51,7 +54,20 @@ namespace NetSpeedMonitor
 
 		#endregion
 
-		private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e)
+		private void ShowConnectionList(object sender, RoutedEventArgs e)
+		{
+			if (e.Source is Hyperlink link)
+			{
+				var p = _ns.NetProcessInfoList.FirstOrDefault(x => x.ProcessName == link.TargetName);
+				if (p != null && p.NetConnectionInfoList.Count > 0)
+				{
+					var log = new ConnectionWindow(p.NetConnectionInfoList, link.TargetName);
+					log.ShowDialog();
+				}
+			}
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			_ns.Start();
 
@@ -67,7 +83,7 @@ namespace NetSpeedMonitor
 		}
 
 
-		private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			//DownloadSpeedLabel.Content = @"999.9 GiB/S";
 			//UploadSpeedLabel.Content = @"999.9 GiB/S";
