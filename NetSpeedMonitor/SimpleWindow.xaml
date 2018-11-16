@@ -1,0 +1,17 @@
+﻿<Window x:Class="NetSpeedMonitor.SimpleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetSpeedMonitor"
+        mc:Ignorable="d"
+        Title="SimpleWindow" Height="50" Width="105" WindowStyle="None" AllowsTransparency="True" Loaded="Window_Loaded" Opacity="0.618" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Topmost="True">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Label x:Name="UploadSpeedLabel" Content="{Binding UploadSpeed}" Foreground="#FFE29510" Margin="0" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ContentStringFormat="↑ {0}"/>
+		<Label x:Name="DownloadSpeedLabel" Content="{Binding DownloadSpeed}" Foreground="Green" Margin="0" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ContentStringFormat="↓ {0}" />
+	</Grid>
+</Window>

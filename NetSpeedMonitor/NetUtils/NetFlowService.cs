@@ -27,7 +27,7 @@ namespace NetSpeedMonitor.NetUtils
 		public long LostPacketCount { get; set; }
 
 		public delegate void ChangeEvent();
-		public ChangeEvent DataChangeEvent;
+		public event ChangeEvent DataChangeEvent;
 
 		public bool Start(int interval = 1000)
 		{

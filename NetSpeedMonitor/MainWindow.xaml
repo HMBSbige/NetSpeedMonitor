@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:myListView="clr-namespace:NetSpeedMonitor.MyListView"
         mc:Ignorable="d"
-        Title="NetSpeedMonitor" Height="537" Width="734" Loaded="Window_Loaded" Closing="Window_Closing" StateChanged="Window_StateChanged">
+        Title="NetSpeedMonitor" Height="537" Width="734" Loaded="Window_Loaded" StateChanged="Window_StateChanged" Closing="Window_Closing">
 
 	<Window.Resources>
 		<DataTemplate x:Key="HeaderTemplateArrowUp">
