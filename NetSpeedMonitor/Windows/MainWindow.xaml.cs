@@ -1,11 +1,11 @@
-﻿using System.Collections.Specialized;
+﻿using NetSpeedMonitor.MyListView;
+using NetSpeedMonitor.NetUtils;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using NetSpeedMonitor.MyListView;
-using NetSpeedMonitor.NetUtils;
 using Binding = System.Windows.Data.Binding;
 
 namespace NetSpeedMonitor.Windows
@@ -107,7 +107,13 @@ namespace NetSpeedMonitor.Windows
 		{
 			try
 			{
-				ProcessesList.Dispatcher.Invoke(ListViewSorter.SortLast);
+				Dispatcher.Invoke(() =>
+				{
+					if (Visibility == Visibility.Visible)
+					{
+						ListViewSorter.SortLast();
+					}
+				});
 			}
 			catch
 			{
@@ -117,7 +123,7 @@ namespace NetSpeedMonitor.Windows
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			Visibility = Visibility.Collapsed;
+			Hide();
 			e.Cancel = true;
 		}
 	}

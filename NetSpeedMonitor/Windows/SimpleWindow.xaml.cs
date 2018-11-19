@@ -50,7 +50,7 @@ namespace NetSpeedMonitor.Windows
 
 		private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			_app.ShowMainWindow();
+			_app.ShowHideMainWindow();
 		}
 
 		private void Exit_Click(object sender, RoutedEventArgs e)
@@ -61,14 +61,6 @@ namespace NetSpeedMonitor.Windows
 		private void ShowDetails_Click(object sender, RoutedEventArgs e)
 		{
 			_app.ShowMainWindow();
-			if (_app.mainWindow.Visibility == Visibility.Visible)
-			{
-				ShowDetailsMenu.Header = @"Hide Traffic Details";
-			}
-			else
-			{
-				ShowDetailsMenu.Header = @"Show Traffic Details";
-			}
 		}
 	}
 }

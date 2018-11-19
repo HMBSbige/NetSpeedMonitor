@@ -28,7 +28,7 @@
 
 	<Border BorderThickness="0" CornerRadius="5,5,5,5">
 		<Border.Background>
-			<SolidColorBrush Opacity="0.618" Color="Black"></SolidColorBrush>
+			<SolidColorBrush Opacity="0.8" Color="Black"></SolidColorBrush>
 		</Border.Background>
 		<Grid>
 			<Grid.ColumnDefinitions>

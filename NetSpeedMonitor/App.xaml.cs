@@ -1,11 +1,11 @@
 ﻿using NetSpeedMonitor.NetUtils;
+using NetSpeedMonitor.Windows;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
-using NetSpeedMonitor.Windows;
 using MessageBox = System.Windows.MessageBox;
 
 namespace NetSpeedMonitor
@@ -18,7 +18,7 @@ namespace NetSpeedMonitor
 		public readonly NetFlowService Ns = new NetFlowService();
 		public WindowState DefaultState = WindowState.Normal;
 		private readonly NotifyIcon notifyIcon = new NotifyIcon();
-		public MainWindow mainWindow;
+		private MainWindow mainWindow;
 		private SimpleWindow simpleWindow;
 		private ContextMenu menu;
 
@@ -59,7 +59,28 @@ namespace NetSpeedMonitor
 			}
 			else
 			{
-				if (mainWindow.Visibility == Visibility.Collapsed)
+				if (mainWindow.Visibility == Visibility.Hidden)
+				{
+					mainWindow.Visibility = Visibility.Visible;
+					Dispatcher.BeginInvoke(DispatcherPriority.Background,
+							new Action(delegate { mainWindow.WindowState = DefaultState; }));
+					mainWindow.Topmost = true;
+					mainWindow.Topmost = false;
+				}
+			}
+		}
+
+		public void ShowHideMainWindow()
+		{
+			if (mainWindow == null)
+			{
+				mainWindow = new MainWindow();
+				mainWindow.Closed += MainWindow_Closed;
+				mainWindow.Show();
+			}
+			else
+			{
+				if (mainWindow.Visibility == Visibility.Hidden)
 				{
 					mainWindow.Visibility = Visibility.Visible;
 					Dispatcher.BeginInvoke(DispatcherPriority.Background,
@@ -69,7 +90,7 @@ namespace NetSpeedMonitor
 				}
 				else
 				{
-					mainWindow.Visibility = Visibility.Collapsed;
+					mainWindow.Hide();
 				}
 			}
 		}
@@ -78,11 +99,11 @@ namespace NetSpeedMonitor
 		{
 			notifyIcon.Icon = new Icon(GetResourceStream(new Uri(@"pack://application:,,,/Resources/monitor.ico")).Stream);
 
-			notifyIcon.Click += (sender, e) =>
+			notifyIcon.DoubleClick += (sender, e) =>
 			{
 				if (e is MouseEventArgs me && me.Button == MouseButtons.Left)
 				{
-					ShowMainWindow();
+					ShowHideMainWindow();
 				}
 			};
 
