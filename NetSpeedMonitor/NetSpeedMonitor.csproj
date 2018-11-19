@@ -65,7 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConnectionWindow.xaml.cs">
+    <Compile Include="Windows\ConnectionWindow.xaml.cs">
       <DependentUpon>ConnectionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyListView\MySorter.cs" />
@@ -77,19 +77,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SimpleWindow.xaml.cs">
+    <Compile Include="Windows\SimpleWindow.xaml.cs">
       <DependentUpon>SimpleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CheckPermission.cs" />
     <Compile Include="Utils\ListTool.cs" />
     <Compile Include="Utils\ProcessInfoTool.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="Utils\WinAPI.cs" />
     <Compile Include="Utils\WinProcess.cs" />
-    <Page Include="ConnectionWindow.xaml">
+    <Page Include="Windows\ConnectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,11 +98,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SimpleWindow.xaml">
+    <Page Include="Windows\SimpleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,6 @@
 ﻿using NetSpeedMonitor.Collections;
 
-namespace NetSpeedMonitor
+namespace NetSpeedMonitor.Windows
 {
 	/// <summary>
 	/// ConnectionWindow.xaml 的交互逻辑

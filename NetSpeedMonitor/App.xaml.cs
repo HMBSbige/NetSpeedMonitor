@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using NetSpeedMonitor.Windows;
 using MessageBox = System.Windows.MessageBox;
 
 namespace NetSpeedMonitor
@@ -17,11 +18,13 @@ namespace NetSpeedMonitor
 		public readonly NetFlowService Ns = new NetFlowService();
 		public WindowState DefaultState = WindowState.Normal;
 		private readonly NotifyIcon notifyIcon = new NotifyIcon();
-		private MainWindow mainWindow;
+		public MainWindow mainWindow;
 		private SimpleWindow simpleWindow;
+		private ContextMenu menu;
 
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
+			CreateMenu();
 			LoadIcon();
 			simpleWindow = new SimpleWindow();
 			Task.Run(() =>
@@ -39,6 +42,38 @@ namespace NetSpeedMonitor
 			});
 		}
 
+		private void CreateMenu()
+		{
+			var menuExit = new MenuItem(@"Exit", (sender, args) => { Exit(); });
+
+			menu = new ContextMenu(new[] { menuExit });
+		}
+
+		public void ShowMainWindow()
+		{
+			if (mainWindow == null)
+			{
+				mainWindow = new MainWindow();
+				mainWindow.Closed += MainWindow_Closed;
+				mainWindow.Show();
+			}
+			else
+			{
+				if (mainWindow.Visibility == Visibility.Collapsed)
+				{
+					mainWindow.Visibility = Visibility.Visible;
+					Dispatcher.BeginInvoke(DispatcherPriority.Background,
+							new Action(delegate { mainWindow.WindowState = DefaultState; }));
+					mainWindow.Topmost = true;
+					mainWindow.Topmost = false;
+				}
+				else
+				{
+					mainWindow.Visibility = Visibility.Collapsed;
+				}
+			}
+		}
+
 		private void LoadIcon()
 		{
 			notifyIcon.Icon = new Icon(GetResourceStream(new Uri(@"pack://application:,,,/Resources/monitor.ico")).Stream);
@@ -47,35 +82,11 @@ namespace NetSpeedMonitor
 			{
 				if (e is MouseEventArgs me && me.Button == MouseButtons.Left)
 				{
-					if (mainWindow == null)
-					{
-						mainWindow = new MainWindow();
-						mainWindow.Closed += MainWindow_Closed;
-						mainWindow.Show();
-					}
-					else
-					{
-						if (mainWindow.Visibility == Visibility.Collapsed)
-						{
-							mainWindow.Visibility = Visibility.Visible;
-							Dispatcher.BeginInvoke(DispatcherPriority.Background,
-									new Action(delegate { mainWindow.WindowState = DefaultState; }));
-							mainWindow.Topmost = true;
-							mainWindow.Topmost = false;
-						}
-						else
-						{
-							mainWindow.Visibility = Visibility.Collapsed;
-						}
-					}
+					ShowMainWindow();
 				}
 			};
 
-			var menuExit = new MenuItem(@"Exit", (sender, args) => { Exit(); });
-
-			var menu = new ContextMenu(new[] { menuExit });
 			notifyIcon.ContextMenu = menu;
-
 			notifyIcon.Visible = true;
 		}
 
@@ -84,7 +95,7 @@ namespace NetSpeedMonitor
 			Exit();
 		}
 
-		private new void Exit(bool code = true)
+		public new void Exit(bool code = true)
 		{
 			Ns.Stop();
 			notifyIcon.Dispose();

@@ -1,14 +1,14 @@
-﻿using NetSpeedMonitor.MyListView;
-using NetSpeedMonitor.NetUtils;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using NetSpeedMonitor.MyListView;
+using NetSpeedMonitor.NetUtils;
 using Binding = System.Windows.Data.Binding;
 
-namespace NetSpeedMonitor
+namespace NetSpeedMonitor.Windows
 {
 	/// <summary>
 	/// MainWindow.xaml 的交互逻辑

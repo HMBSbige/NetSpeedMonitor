@@ -100,5 +100,71 @@ namespace NetSpeedMonitor.Utils
 
 			return wpfBitmap;
 		}
+
+		/// <summary>
+		/// Remove the window from "Alt + TAB list".
+		/// </summary>
+		/// <param name="window">The window</param>
+		/// <param name="NoActivate">No activate (get focus)</param>
+		public static void WindowMissFromMission(Window window, bool NoActivate)
+		{
+			var helper = new WindowInteropHelper(window);
+			var old = WinAPI.GetWindowLong(helper.Handle, WinAPI.GWL_EXSTYLE);
+			old |= WinAPI.WS_EX_TOOLWINDOW;
+			if (NoActivate)
+			{
+				old |= WinAPI.WS_EX_NOACTIVATE;
+			}
+			WinAPI.SetWindowLong(helper.Handle, WinAPI.GWL_EXSTYLE, (IntPtr)old);
+		}
+
+		/// <summary>
+		/// Make sure the window is in the work area. (Make sure the window is in the screen and doesn't be covered by taskbar.)
+		/// </summary>
+		/// <param name="window">The window smaller than work area.</param>
+		/// <param name="padding">Padding of the window</param>
+		/// <returns>False if work area doesn't contain the window </returns>
+		public static bool MoveWindowBackToWorkArea(Window window, Thickness padding)
+		{
+			var workArea = SystemParameters.WorkArea;
+			var rect = new Rect(window.Left - padding.Left, window.Top - padding.Top, window.Width + padding.Left + padding.Right, window.Height + padding.Top + padding.Bottom);
+			if (!workArea.Contains(rect))
+			{
+				var heightSpan = rect.Bottom - workArea.Bottom;
+				if (heightSpan > 0)
+				{
+					window.Top = window.Top - heightSpan;
+				}
+				else
+				{
+					heightSpan = workArea.Top - rect.Top;
+					if (heightSpan > 0)
+					{
+						window.Top = window.Top + heightSpan;
+					}
+				}
+
+				var widthSpan = rect.Right - workArea.Right;
+				if (widthSpan > 0)
+				{
+					window.Left = window.Left - widthSpan;
+				}
+				else
+				{
+					widthSpan = workArea.Left - rect.Left;
+					if (widthSpan > 0)
+					{
+						window.Left = window.Left + widthSpan;
+					}
+				}
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 	}
 }
